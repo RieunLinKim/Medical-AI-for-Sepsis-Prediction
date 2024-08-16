@@ -76,6 +76,12 @@ def build_model(model_type, config, model_path):
         model = LogisticRegressionModel(input_shape, 1, config, model_path)
     elif model_type == 'MLP':
         model = MLPModel(input_shape, 1, config, model_path)
+    elif model_type == 'RNN':
+        model = RNNModel(config, model_path)
+    elif model_type == 'LSTM':
+        model = LSTMModel(config, model_path)
+    elif model_type == 'GRU':
+        model = GRUModel(config, model_path)
     elif model_type == 'ResNet':
         model = ResNetModel(input_shape, 1, config, model_path)
     elif model_type == 'Transformer':

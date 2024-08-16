@@ -16,7 +16,8 @@ ORGAN_N_LAYERS   = 4
 ORGAN_FF_DIM     = 128
 
 sepsis_ids_filepath = "../data/sepsis_ids.json"
-train_ids_filepath = "../data/train_ids.json"
+train_ids_filepath = "../data/train_pos.json"
+# train_ids_filepath = "../data/train_ids.json"   # split into trainng and testing, manually truncate some of it
 test_ids_filepath = "../data/test_ids.json"
 synthetic_train_ids_filepath = '../data/synthetic_train_ids.json'
 synthetic_test_ids_filepath = '../data/synthetic_test_ids.json'

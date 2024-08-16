@@ -1,0 +1,30 @@
+{
+    "data": {
+        "window_size": 72,
+        "start_offset": 12,
+        "columns": [
+            "HR", "O2Sat", "Temp", "SBP", "MAP", "DBP", "Resp", "EtCO2",
+            "BaseExcess", "HCO3", "FiO2", "pH", "PaCO2", "SaO2", "AST", "BUN",
+            "Alkalinephos", "Calcium", "Chloride", "Creatinine",
+            "Bilirubin_direct", "Glucose", "Lactate", "Magnesium", "Phosphate",
+            "Potassium", "Bilirubin_total", "TroponinI", "Hct", "Hgb", "PTT",
+            "WBC", "Fibrinogen", "Platelets", "Age", "Unit1", "Unit2", "Gender",
+            "HospAdmTime", "ICULOS"
+        ]
+    },
+    "model": {
+        "type": "RNN",
+        "input_shape": [72, 40],
+        "hidden_size": 128,
+        "output_size": 1,
+        "num_layers": 3,
+        "saved_path": "../models/RNN_LINEAR_trial_9_0.00672_08_12_2024_17_48_19.pth",
+        "layers": [
+                {"type": "Linear", "in_features": 40, "out_features": 128},
+                {"type": "RNNLayer", "in_features": 128, "out_features": 128},
+                {"type": "RNNLayer", "in_features": 128, "out_features": 128},
+                {"type": "Linear", "in_features": 128, "out_features": 1},
+                {"type": "Sigmoid"}
+        ]
+    }
+}
