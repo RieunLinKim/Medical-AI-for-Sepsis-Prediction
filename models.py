@@ -289,15 +289,7 @@ class RNNModel(BaseModel):
         ])
 
         # Final output layer
-        self.final_layer = nn.Sequential(
-            nn.Linear(self.hidden_size, self.output_size),
-            nn.Sigmoid()
-        )
-
-        # # Print recurrent layer parameters
-        # print("recurrent_layers parameters:")
-        # for param in self.recurrent_layers.parameters():
-        #     print(param)
+        self.final_layer = nn.Linear(self.hidden_size, self.output_size)
 
         self.model_path = model_path
         self.init_weights()
@@ -403,10 +395,7 @@ class LSTMModel(BaseModel):
         self.lstm_layers = nn.ModuleList([self.LSTMCell(self.input_size if i == 0 else self.hidden_size, self.hidden_size) for i in range(self.num_layers)])
         
         # Final output layer
-        self.final_layer = nn.Sequential(
-            nn.Linear(self.hidden_size, config['model']['output_size']),
-            nn.Sigmoid()
-        )
+        self.final_layer = nn.Linear(self.hidden_size, config['model']['output_size'])
 
 
         self.model_path = model_path
@@ -426,10 +415,8 @@ class LSTMModel(BaseModel):
                 h_t[layer], c_t[layer] = self.lstm_layers[layer](x_t, h_t[layer], c_t[layer])
                 x_t = h_t[layer]  # Input to the next layer is the output of the current layer
         
-        # Pass through the linear and ReLU layers
-        x = self.fc1(h_t[-1])  # Use the output of the last LSTM layer
-        x = self.relu(x)
-        y = self.fc2(x)
+        # Pass through the final output layer
+        y = self.final_layer(h_t[-1])  # Use the output of the last LSTM layer
         
         return y
     
@@ -474,17 +461,14 @@ class GRUModel(BaseModel):
         # Initialize GRU layers and output layer
         self.initial_layer = nn.Linear(self.input_shape[1], self.hidden_size)
         self.gru_layers = nn.ModuleList([self.GRUCell(self.hidden_size, self.hidden_size) for _ in range(self.num_layers)])
-        self.final_layer = nn.Sequential(
-            nn.Linear(self.hidden_size, self.output_size),
-            nn.Sigmoid()
-        )
+        self.final_layer = nn.Linear(self.hidden_size, self.output_size)
         
         self.model_path = model_path
         self.load_saved_model()
 
     def forward(self, x):
         batch_size, seq_len, feature_size = x.size()
-        h = torch.zeros(batch_size, self.hidden_size).to(x.device)
+        h = torch.zeros(batch_size, self.hidden_size).to(x.device) 
         
         # Pass through initial linear layer
         x = self.initial_layer(x)

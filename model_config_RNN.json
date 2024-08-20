@@ -18,7 +18,6 @@
         "hidden_size": 128,
         "output_size": 1,
         "num_layers": 3,
-        "saved_path": "../models/RNN_LINEAR_trial_9_0.00672_08_12_2024_17_48_19.pth",
         "layers": [
                 {"type": "Linear", "in_features": 40, "out_features": 128},
                 {"type": "RNNLayer", "in_features": 128, "out_features": 128},

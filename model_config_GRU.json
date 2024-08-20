@@ -17,13 +17,6 @@
         "input_shape": [72, 40],
         "hidden_size": 128,
         "output_size": 1,
-        "num_layers": 3,
-        "layers": [
-            {"type": "Linear", "in_features": 40, "out_features": 128},
-            {"type": "GRULayer", "input_dim": 128, "hidden_dim": 128},
-            {"type": "GRULayer", "input_dim": 128, "hidden_dim": 128},
-            {"type": "Linear", "in_features": 128, "out_features": 1},
-            {"type": "Sigmoid"} 
-        ]
+        "num_layers": 3
     }
 }

@@ -1,6 +1,7 @@
 import json
 from utils import get_patient_by_id_original
 from tqdm import tqdm
+import random
 
 # with open("../data/sepsis_ids.json", "r") as f:
 #     sepsis_ids = json.load(f)
@@ -30,3 +31,12 @@ print("train_ids: ", len(train_ids))
 
 with open("../data/train_pos.json", "w") as f:
     json.dump(train_pos, f)
+
+# Randomly choose 50 from train_pos, if train_pos has more than 50 elements
+if len(train_pos) > 50:
+    train_pos_random = random.sample(train_pos, 50)
+
+with open("../data/train_pos_random.json", "w") as f:
+    json.dump(train_pos_random, f)
+
+print("train_pos_random: ", len(train_pos_random))

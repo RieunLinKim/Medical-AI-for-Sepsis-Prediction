@@ -217,7 +217,7 @@ def evaluate_model(model, runid, test_loader):
                 x_batch = x_batch.to(device)
                 outputs = model(x_batch).tolist()
             y_label.extend(y_batch.tolist())
-            y_prob.extend(outputs)
+            y_prob.extend(torch.sigmoid(outputs))
             for i, (p, r) in enumerate(zip(pid, rid)):
                 if not p.item() in results:
                     results[p.item()] = {}
